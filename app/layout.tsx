@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from 'next'
-import { Bodoni_Moda, Jost, Mrs_Saint_Delafield } from 'next/font/google'
+import localFont from 'next/font/local'
 import './globals.css'
 import Providers from '@/components/Providers'
 import Nav from '@/components/Nav'
@@ -7,9 +7,30 @@ import Footer from '@/components/Footer'
 import WhatsAppButton from '@/components/WhatsAppButton'
 import { siteConfig, testimonials, services } from '@/content/data'
 
-const serif = Bodoni_Moda({ subsets: ['latin'], style: ['normal', 'italic'], weight: ['400', '500'], variable: '--serif', display: 'swap' })
-const sans = Jost({ subsets: ['latin'], weight: ['300', '400', '500'], variable: '--sans', display: 'swap' })
-const script = Mrs_Saint_Delafield({ subsets: ['latin'], weight: '400', variable: '--script', display: 'swap' })
+// Fuentes autoalojadas (subset latin de Google Fonts, variables): el build no depende de fonts.googleapis.com
+const serif = localFont({
+  src: [
+    { path: './fonts/BodoniModa.woff2', weight: '400 500', style: 'normal' },
+    { path: './fonts/BodoniModa-Italic.woff2', weight: '400 500', style: 'italic' },
+  ],
+  variable: '--serif',
+  display: 'swap',
+  fallback: ['Georgia', 'serif'],
+})
+const sans = localFont({
+  src: './fonts/Jost.woff2',
+  weight: '300 500',
+  variable: '--sans',
+  display: 'swap',
+  fallback: ['system-ui', 'sans-serif'],
+})
+const script = localFont({
+  src: './fonts/MrsSaintDelafield.woff2',
+  weight: '400',
+  variable: '--script',
+  display: 'swap',
+  fallback: ['cursive'],
+})
 
 const url = `https://${siteConfig.domain}`
 
